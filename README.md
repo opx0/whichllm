@@ -174,6 +174,9 @@ whichllm
 # Simulate a GPU (e.g. planning a purchase)
 whichllm --gpu "RTX 4090"
 whichllm --gpu "RTX 5090"
+# Specify variant
+whichllm --gpu "RTX 5060 16"
+
 
 # CPU-only mode
 whichllm --cpu-only
