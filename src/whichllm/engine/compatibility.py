@@ -53,8 +53,13 @@ def check_compatibility(
                 f"minimum {MIN_COMPUTE_CAPABILITY_OLLAMA} for Ollama"
             )
 
-    # Check ROCm for AMD
-    if best_gpu and best_gpu.vendor == "amd" and hardware.os != "linux":
+    # Check ROCm for AMD. Windows AMD users can still use Vulkan/DirectML
+    # backends, so do not label the GPU path as unavailable there.
+    if (
+        best_gpu
+        and best_gpu.vendor == "amd"
+        and hardware.os not in ("linux", "windows")
+    ):
         warnings.append("ROCm requires Linux for AMD GPU inference")
 
     # Check Metal for Apple
