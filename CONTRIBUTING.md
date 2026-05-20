@@ -7,15 +7,13 @@ Thanks for your interest in contributing! Here's how you can help.
 ```bash
 git clone https://github.com/Andyyyy64/whichllm.git
 cd whichllm
-python -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
+uv sync --dev
 ```
 
 ## Running Tests
 
 ```bash
-pytest
+uv run pytest
 ```
 
 ## How to Contribute
@@ -34,7 +32,7 @@ Open an issue describing the feature and why it would be useful.
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/your-feature`)
 3. Make your changes
-4. Run tests (`pytest`)
+4. Run tests (`uv run pytest`)
 5. Submit a PR
 
 ### AI-assisted Contributions
