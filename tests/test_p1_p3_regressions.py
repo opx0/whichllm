@@ -228,6 +228,19 @@ def test_p2_lineage_covers_llama_deepseek_gemma_phi():
     )
 
 
+def test_p2_lineage_covers_t5_variants_without_gemma_collision():
+    assert _generation_bonus("google/t5gemma-4b") > _generation_bonus(
+        "google/flan-t5-xl"
+    )
+    assert _generation_bonus("google/t5-gemma-4b") == _generation_bonus(
+        "google/t5gemma-4b"
+    )
+    assert _generation_bonus("google/t5_gemma-4b") == _generation_bonus(
+        "google/t5gemma-4b"
+    )
+    assert _generation_bonus("openai/gpt5-test") == 0.0
+
+
 def test_p2_unknown_family_gets_zero_bonus():
     assert _generation_bonus("random-org/random-model-7b") == 0.0
 

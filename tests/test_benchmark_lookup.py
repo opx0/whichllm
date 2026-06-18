@@ -1,6 +1,7 @@
 """Tests for benchmark lookup direct/inherited semantics."""
 
 from whichllm.models.benchmark import (
+    _lineage_recency_factor,
     build_line_bucket_index,
     build_score_index,
     lookup_benchmark,
@@ -148,3 +149,10 @@ def test_lookup_benchmark_evidence_line_uses_size_aware_interpolation():
     assert result.score is not None
     assert 65.0 < result.score < 85.0
     assert result.confidence > 0.2
+
+
+def test_lineage_recency_t5gemma_variants_are_not_demoted_as_old_gemma():
+    assert _lineage_recency_factor("google/t5gemma-4b") == 1.0
+    assert _lineage_recency_factor("google/t5-gemma-4b") == 1.0
+    assert _lineage_recency_factor("google/t5_gemma-4b") == 1.0
+    assert _lineage_recency_factor("google/gemma-2-2b") < 1.0
